@@ -56,7 +56,19 @@ static void MX_TIM2_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+uint8_t segmentNumber[10] = {0xc0,0xf9,0xa4,0xb0,0x99,0x92,0x82,0xf8,0x80,0x90};
+void display7SEG(int num)
+{
+	uint8_t number = segmentNumber[num];
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0, ((number>>0)&0x01));
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_1, ((number>>1)&0x01));
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_2, ((number>>2)&0x01));
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_3, ((number>>3)&0x01));
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_4, ((number>>4)&0x01));
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, ((number>>5)&0x01));
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_6, ((number>>6)&0x01));
 
+}
 /* USER CODE END 0 */
 
 /**
@@ -94,10 +106,49 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  setTimer1(3);
+  setTimer2(13);
+  int status =0;
   while (1)
   {
     /* USER CODE END WHILE */
+	  if (timer1_flag == 1){
+		  setTimer1(100);
+		  switch (status){
+		  case 0:
+			  status++;
+			  HAL_GPIO_TogglePin(EN0_GPIO_Port, EN0_Pin);
+			  HAL_GPIO_WritePin(EN3_GPIO_Port, EN3_Pin, 0);
+			  display7SEG(1);
+			  break;
+		  case 1:
+			  status++;
+			  HAL_GPIO_TogglePin(EN0_GPIO_Port, EN0_Pin);
+			  HAL_GPIO_TogglePin(EN1_GPIO_Port, EN1_Pin);
+			  display7SEG(2);
+			  break;
+		  case 2:
+			  status++;
+			  HAL_GPIO_TogglePin(EN1_GPIO_Port, EN1_Pin);
+			  HAL_GPIO_TogglePin(EN2_GPIO_Port, EN2_Pin);
+			  display7SEG(3);
+			  break;
+		  case 3:
+			  status = 0;
+			  HAL_GPIO_TogglePin(EN2_GPIO_Port, EN2_Pin);
+			  HAL_GPIO_TogglePin(EN3_GPIO_Port, EN3_Pin);
+			  display7SEG(0);
+			  break;
+		  default:
+			  break;
+		  }
+	  }
 
+	  if (timer2_flag == 1){
+		  setTimer2(100);
+		  HAL_GPIO_TogglePin(DOT_GPIO_Port, DOT_Pin);
+		  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+	  }
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
