@@ -108,8 +108,7 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   setTimer1(3);
-  setTimer2(5);
-  int status =0, statusSEG =0;
+  int status =0;
   while (1)
   {
 	    /* USER CODE END WHILE */
@@ -121,27 +120,19 @@ int main(void)
 				  HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, 1);
 				  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, 0);
 				  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+				  display7SEG(1);
 				  break;
 			  case 1:
 				  status =0;
 				  HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, 0);
 				  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, 1);
 				  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
+				  display7SEG(2);
 				  break;
 			  default:
 				  break;
 			  }
 		  }
-
-		  if (timer2_flag ==1){
-			  setTimer2(50);
-			  display7SEG(statusSEG);
-			  if (statusSEG == 9){
-				  statusSEG =0;
-			  }
-			  else statusSEG ++;
-		  }
-
 
 	    /* USER CODE BEGIN 3 */
   }
