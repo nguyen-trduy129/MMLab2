@@ -27,23 +27,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000029  00000000  00000000  00020018  2**0
                   CONTENTS, READONLY
- 12 .debug_info   000082e5  00000000  00000000  00020041  2**0
+ 12 .debug_info   000082fd  00000000  00000000  00020041  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 000015a1  00000000  00000000  00028326  2**0
+ 13 .debug_abbrev 000015a1  00000000  00000000  0002833e  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 00000960  00000000  00000000  000298c8  2**3
+ 14 .debug_aranges 00000960  00000000  00000000  000298e0  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_ranges 000008a8  00000000  00000000  0002a228  2**3
+ 15 .debug_ranges 000008a8  00000000  00000000  0002a240  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  0001625b  00000000  00000000  0002aad0  2**0
+ 16 .debug_macro  0001625b  00000000  00000000  0002aae8  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   00009304  00000000  00000000  00040d2b  2**0
+ 17 .debug_line   00009304  00000000  00000000  00040d43  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    00081cdd  00000000  00000000  0004a02f  2**0
+ 18 .debug_str    00081ce9  00000000  00000000  0004a047  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000053  00000000  00000000  000cbd0c  2**0
+ 19 .comment      00000053  00000000  00000000  000cbd30  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  0000264c  00000000  00000000  000cbd60  2**2
+ 20 .debug_frame  0000264c  00000000  00000000  000cbd84  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -236,7 +236,7 @@ int main(void)
  800023e:	687b      	ldr	r3, [r7, #4]
  8000240:	2b01      	cmp	r3, #1
  8000242:	d015      	beq.n	8000270 <main+0x6c>
-				  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, 1);
+				  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, 0);
 				  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
 				  display7SEG(2);
 				  break;
@@ -247,13 +247,13 @@ int main(void)
  8000246:	687b      	ldr	r3, [r7, #4]
  8000248:	3301      	adds	r3, #1
  800024a:	607b      	str	r3, [r7, #4]
-				  HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, 1);
- 800024c:	2201      	movs	r2, #1
+				  HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, 0);
+ 800024c:	2200      	movs	r2, #0
  800024e:	2140      	movs	r1, #64	; 0x40
  8000250:	4814      	ldr	r0, [pc, #80]	; (80002a4 <main+0xa0>)
  8000252:	f000 fcdf 	bl	8000c14 <HAL_GPIO_WritePin>
-				  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, 0);
- 8000256:	2200      	movs	r2, #0
+				  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, 1);
+ 8000256:	2201      	movs	r2, #1
  8000258:	2180      	movs	r1, #128	; 0x80
  800025a:	4812      	ldr	r0, [pc, #72]	; (80002a4 <main+0xa0>)
  800025c:	f000 fcda 	bl	8000c14 <HAL_GPIO_WritePin>
@@ -269,13 +269,13 @@ int main(void)
 				  status =0;
  8000270:	2300      	movs	r3, #0
  8000272:	607b      	str	r3, [r7, #4]
-				  HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, 0);
- 8000274:	2200      	movs	r2, #0
+				  HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, 1);
+ 8000274:	2201      	movs	r2, #1
  8000276:	2140      	movs	r1, #64	; 0x40
  8000278:	480a      	ldr	r0, [pc, #40]	; (80002a4 <main+0xa0>)
  800027a:	f000 fccb 	bl	8000c14 <HAL_GPIO_WritePin>
-				  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, 1);
- 800027e:	2201      	movs	r2, #1
+				  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, 0);
+ 800027e:	2200      	movs	r2, #0
  8000280:	2180      	movs	r1, #128	; 0x80
  8000282:	4808      	ldr	r0, [pc, #32]	; (80002a4 <main+0xa0>)
  8000284:	f000 fcc6 	bl	8000c14 <HAL_GPIO_WritePin>

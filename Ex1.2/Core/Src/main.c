@@ -117,15 +117,15 @@ int main(void)
 			  switch (status){
 			  case 0:
 				  status++;
-				  HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, 1);
-				  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, 0);
+				  HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, 0);
+				  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, 1);
 				  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
 				  display7SEG(1);
 				  break;
 			  case 1:
 				  status =0;
-				  HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, 0);
-				  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, 1);
+				  HAL_GPIO_WritePin(EN0_GPIO_Port, EN0_Pin, 1);
+				  HAL_GPIO_WritePin(EN1_GPIO_Port, EN1_Pin, 0);
 				  HAL_GPIO_TogglePin(LED_RED_GPIO_Port, LED_RED_Pin);
 				  display7SEG(2);
 				  break;
